@@ -47,6 +47,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
+
     }
 
     @Nullable
