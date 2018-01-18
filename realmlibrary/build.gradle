@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'realm-android'
 android {
     compileSdkVersion rootProject.ext.compileSdk
     buildToolsVersion rootProject.ext.buildTools
@@ -20,14 +20,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    //rxjava
-    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'org.reactivestreams:reactive-streams:1.0.0'
-    // retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0-RC3'
-    // logger
-    compile 'com.orhanobut:logger:1.15'
+    compile 'com.uphyca:stetho_realm:2.0.0'
+    //compile 'io.realm:realm-android:0.84.1'
 }

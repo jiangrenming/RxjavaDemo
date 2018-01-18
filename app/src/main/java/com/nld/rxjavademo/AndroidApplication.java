@@ -2,6 +2,7 @@ package com.nld.rxjavademo;
 
 import android.app.Application;
 import android.content.Context;
+import com.jrm.realmlibrary.factory.RealmFactory;
 import com.nld.retrofitlibrary.retrofit.RetrofitBuilder;
 import com.nld.retrofitlibrary.retrofit.RetrofitService;
 import com.nld.rxjavademo.api.ApiService;
@@ -9,6 +10,7 @@ import com.nld.rxjavademo.ui.injector.component.ApplicationComponent;
 import com.nld.rxjavademo.ui.injector.component.DaggerApplicationComponent;
 import com.nld.rxjavademo.ui.injector.module.ApplicationModule;
 import com.nld.rxjavademo.util.Constant;
+import io.realm.Realm;
 
 /**
  *
@@ -21,6 +23,7 @@ public class AndroidApplication extends Application{
     private static Context sContext;
     public static  ApiService apiService;
     public static ApplicationComponent applicationComponent;
+    public  static Realm mRealm;
 
     @Override
     public void onCreate() {
@@ -38,6 +41,22 @@ public class AndroidApplication extends Application{
         RetrofitService.setConfig(builder);
         RetrofitService.init();
         apiService = RetrofitService.getRetrofit().create(ApiService.class);
+        //实例化数据库
+        mRealm = RealmFactory.getInstance().initRealm(sContext,Constant.version_code,Constant.version_name);
+    }
+
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        if (mRealm != null && mRealm.isClosed()){
+            mRealm.close();
+            mRealm = null;
+        }
+    }
+
+    public static Realm getmRealm() {
+        return mRealm;
     }
 
     public static Context getsContext() {

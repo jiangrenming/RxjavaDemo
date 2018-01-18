@@ -14,6 +14,7 @@ import com.nld.rxjavademo.view.EmptyLayout;
 import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 /**
  *
@@ -90,5 +91,17 @@ public abstract class BaseActivity<T extends IBasePresenter> extends Activity im
      */
     public ActivityModule getActivityModule(){
         return new ActivityModule(this);
+    }
+
+    public static  Realm getActivityRealm(){
+        return AndroidApplication.getmRealm();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (AndroidApplication.getmRealm() != null && !AndroidApplication.getmRealm().isClosed()){
+            AndroidApplication.getmRealm().isClosed();
+        }
     }
 }

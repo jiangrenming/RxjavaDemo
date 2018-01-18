@@ -9,6 +9,7 @@ buildscript {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath "io.realm:realm-gradle-plugin:3.2.1"
     }
 }
 
@@ -16,9 +17,21 @@ allprojects {
     repositories {
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven {
+            url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
+        }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext{
+    compileSdk = 26
+    buildTools = "27.0.2"
+    minSdk = 15
+    targetSdk = 26
+    version =1
+    name = "1.0"
 }

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RxjavaDemo.iml" filepath="$PROJECT_DIR$/RxjavaDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/realmlibrary/realmlibrary.iml" filepath="$PROJECT_DIR$/realmlibrary/realmlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/retrofitlibrary/retrofitlibrary.iml" filepath="$PROJECT_DIR$/retrofitlibrary/retrofitlibrary.iml" />
     </modules>
   </component>
