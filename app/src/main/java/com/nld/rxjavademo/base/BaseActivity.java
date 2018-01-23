@@ -51,6 +51,7 @@ public abstract class BaseActivity<T extends IBasePresenter> extends Activity im
         super.onCreate(savedInstanceState);
         setContentView(attchLayoutRes());
         ButterKnife.bind(this);
+        AndroidApplication.addActivity(this);
         initInjector();
         initDatas();
         upDateViews();

@@ -12,9 +12,6 @@
           android:text="flown测试"
           android:layout_width="match_parent"
           android:layout_height="50dp" />
-
-
-
       <Button
           android:id="@+id/btn_two"
           android:text="添加数据库"

@@ -1,5 +1,6 @@
 package com.nld.rxjavademo;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import com.jrm.realmlibrary.factory.RealmFactory;
@@ -10,6 +11,8 @@ import com.nld.rxjavademo.ui.injector.component.ApplicationComponent;
 import com.nld.rxjavademo.ui.injector.component.DaggerApplicationComponent;
 import com.nld.rxjavademo.ui.injector.module.ApplicationModule;
 import com.nld.rxjavademo.util.Constant;
+import java.util.ArrayList;
+import java.util.List;
 import io.realm.Realm;
 
 /**
@@ -24,7 +27,10 @@ public class AndroidApplication extends Application{
     public static  ApiService apiService;
     public static ApplicationComponent applicationComponent;
     public  static Realm mRealm;
-
+    /**
+     * 本地activity栈
+     */
+    public static List<Activity> activitys = new ArrayList<Activity>();
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,8 +40,7 @@ public class AndroidApplication extends Application{
 
     private void initData() {
         //实现dagger2的全局单例实例
-        applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
-
+       applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
         RetrofitBuilder builder = new RetrofitBuilder.Builder().setBaseUrl(Constant.baseUrl)
                 .setContext(getApplicationContext()).build();
         RetrofitService.setConfig(builder);
@@ -52,6 +57,29 @@ public class AndroidApplication extends Application{
         if (mRealm != null && mRealm.isClosed()){
             mRealm.close();
             mRealm = null;
+        }
+    }
+
+    /**
+     * @param activity
+     * @see [类、类#方法、类#成员]
+     */
+    public static  void addActivity(Activity activity)
+    {
+        activitys.add(activity);
+    }
+
+    /**
+     * <删除>
+     * <功能详细描述>
+     * @param activity
+     * @see [类、类#方法、类#成员]
+     */
+    public static void deleteActivity(Activity activity) {
+        if (activity != null) {
+            activitys.remove(activity);
+            activity.finish();
+            activity = null;
         }
     }
 

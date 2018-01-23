@@ -11,8 +11,9 @@ import io.realm.annotations.Required;
  * @date 2018/1/17
  */
 @RealmClass
-public class Dog implements RealmModel{
+public class Dog extends RealmObject{
 
+    @Required
     private int age;
     private String sex;
     @Required

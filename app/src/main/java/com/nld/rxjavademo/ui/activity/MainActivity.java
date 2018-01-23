@@ -5,8 +5,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.nld.rxjavademo.AndroidApplication;
 import com.nld.rxjavademo.R;
 import com.nld.rxjavademo.api.bean.Subjects;
 import com.nld.rxjavademo.base.BaseActivity;
@@ -17,11 +15,14 @@ import com.nld.rxjavademo.presenter.MoviesPresenter;
 import com.nld.rxjavademo.ui.injector.component.DaggerMovieComponent;
 import com.nld.rxjavademo.ui.injector.module.MovieModule;
 import com.nld.rxjavademo.ui.view.IMovieView;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 
 
 /**
@@ -75,18 +76,35 @@ public class MainActivity extends BaseActivity<MoviesPresenter> implements IMovi
                 mPresenter.getMoreData();
                 break;
             case R.id.btn_two:  //添加数据库
-                UserDao userDao = new UserDaoImp(getActivityRealm());
+                UserDao userDao = new UserDaoImp(getActivityRealm(),"User");
                 User user = new User();
-                user.setId(1);
+                user.setId(2);
                 user.setAge(10);
                 user.setName("黎明");
                 userDao.insert(user);
                 break;
             case R.id.btn_three:  //查询
+                Map<String,Object> map  = new HashMap<>();
+                map.put("id",2);
+                RealmResults<User> query = new UserDaoImp(getActivityRealm()).query(User.class, map);
+                if (query != null){
+                    for (int i = 0;i< query.size() ;i++){
+                        User user1 = query.get(i);
+                        txt.setText(user1.toString());
+                    }
+                }else {
+                    Toast.makeText(MainActivity.this,"未查询到相关数据资料",Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.btn_four:    //删除
+                Map<String,Object> delete  = new HashMap<>();
+                delete.put("id",1);
+                new UserDaoImp(getActivityRealm()).delete(User.class,delete);
                 break;
             case R.id.btn_five:    //更新
+                Map<String,Object> values  = new HashMap<>();
+                values.put("id",1);
+                new UserDaoImp(getActivityRealm()).upDate("11",User.class,values);
                 break;
             default:
                 break;

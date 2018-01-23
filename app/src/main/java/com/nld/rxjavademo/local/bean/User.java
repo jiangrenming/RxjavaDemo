@@ -23,7 +23,14 @@ public class User extends RealmObject{
     @Required
     private String name;
     private int age;
+    private RealmList<Dog> dogs;
+    public RealmList<Dog> getDogs() {
+        return dogs;
+    }
 
+    public void setDogs(RealmList<Dog> dogs) {
+        this.dogs = dogs;
+    }
 
     public int getId() {
         return id;
@@ -47,5 +54,14 @@ public class User extends RealmObject{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

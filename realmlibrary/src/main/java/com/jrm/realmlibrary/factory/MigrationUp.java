@@ -21,7 +21,24 @@ public class MigrationUp implements RealmMigration{
 
     @Override
     public void migrate(DynamicRealm realm, long oldVersion, long newVersion) {
+       /* RealmSchema schema = realm.getSchema();
+        if (schema != null){
+          if (oldVersion == 1){
+              RealmObjectSchema user = schema.get("User");
+              if (user != null){
+                  user.addRealmListField("dogs",schema.get("Dog"))
+                          .addField("age",int.class,FieldAttribute.REQUIRED)
+                          .addField("sex",String.class)
+                          .addField("name",String.class,FieldAttribute.REQUIRED);
+              }
+              oldVersion ++;
+          }
+          if (oldVersion == 2){
 
+              oldVersion ++;
+          }
+
+        }*/
     }
 
 }

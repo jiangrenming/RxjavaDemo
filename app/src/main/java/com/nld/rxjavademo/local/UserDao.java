@@ -1,9 +1,12 @@
 package com.nld.rxjavademo.local;
 
-import java.util.List;
+import com.nld.rxjavademo.local.bean.User;
 
-import io.realm.RealmModel;
+import java.util.List;
+import java.util.Map;
+import io.realm.RealmAsyncTask;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 
 /**
  *
@@ -13,18 +16,18 @@ import io.realm.RealmObject;
 
 public interface UserDao {
     //单一插入
-    void insert(RealmObject realmModel);
+    int insert(RealmObject realmModel);
     //批量插入
-    void insert(List<? extends RealmObject> realms);
-    //查询一条数据
-    RealmModel query(String key);
+    RealmAsyncTask insert(List<? extends RealmObject> realms);
+    //查询部分数据
+    RealmResults<User> query(Class clazz, Map<String,Object> values);
     //查询所有的数据
-    List<? extends RealmObject> queryAll();
+    RealmResults<User> queryAll(Class clazz);
     //删除一条数据
-    void delete(String key,RealmObject realmModel);
+    void delete(Class clazz, Map<String,Object> values);
     //删除所有的数据
-    void deleteAll();
+    void deleteAll(Class clazz);
     //更新数据
-    void upDate(String key);
+    void upDate(String value,Class clazz,Map<String, Object> values);
 
 }
